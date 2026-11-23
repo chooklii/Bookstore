@@ -87,7 +87,7 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
-            label = { Text(stringResource(R.string.comment_optional)) },
+            label = { Text(stringResource(R.string.learning_optional)) },
             minLines = 3
         )
 
@@ -97,7 +97,7 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
-            label = { Text(stringResource(R.string.learning_optional)) },
+            label = { Text(stringResource(R.string.comment_optional)) },
             minLines = 3
         )
 
