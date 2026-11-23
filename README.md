@@ -1,4 +1,4 @@
-![Bookstore Launcher-Icon](app/src/main/res/drawable-nodpi/ic_launcher_foreground.png)
+<img src="app/src/main/res/drawable-nodpi/ic_launcher_foreground.png" alt="logo" width="400"/>
 
 # Bookstore
 
