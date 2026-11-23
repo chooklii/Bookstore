@@ -1,5 +1,6 @@
 package com.example.bookstore.ui.screens
 
+import com.example.bookstore.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import com.example.bookstore.ui.core.Book
 
 @Composable
@@ -39,12 +41,12 @@ fun BookOverviewScreen(
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 Text(
-                    text = "Book Overview",
+                    text = stringResource(R.string.book_overview),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Your personal reading shelf",
+                    text = stringResource(R.string.personal_reading_shelf),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -92,14 +94,14 @@ fun DisplaySingleBook(book: Book) {
             }
             if(book.learning != null){
                 Text(
-                    text = "Learning: ${book.learning}",
+                    text = stringResource(R.string.learning_with_value, book.learning),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             if(book.comment != null) {
                 Text(
-                    text = "Kommentar: ${book.comment}",
+                    text = stringResource(R.string.comment_with_value, book.comment),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

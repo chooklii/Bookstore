@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Bookstore</string>
+    <string name="menu_mybook">My Books</string>
+    <string name="menu_add_book">Add Book</string>
+    <string name="add_book_title">Add a book</string>
+    <string name="add_book_description">Save a title, your rating, and an optional note.</string>
+    <string name="book_name">Book name</string>
+    <string name="your_rating">Your rating</string>
+    <string name="comment_optional">Comment (optional)</string>
+    <string name="learning_optional">Learning (optional)</string>
+    <string name="save_book">Save book</string>
+    <string name="book_overview">Book Overview</string>
+    <string name="personal_reading_shelf">Your personal reading shelf</string>
+    <string name="learning_with_value">Learning: %1$s</string>
+    <string name="comment_with_value">Comment: %1$s</string>
 </resources>

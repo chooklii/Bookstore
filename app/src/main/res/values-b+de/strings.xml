@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Bookstore</string>
+    <string name="menu_mybook">Meine Bücher</string>
+    <string name="menu_add_book">Buch hinzufügen</string>
+    <string name="add_book_title">Buch hinzufügen</string>
+    <string name="add_book_description">Speichere einen Titel, deine Bewertung und eine optionalen Notiz.</string>
+    <string name="book_name">Buchname</string>
+    <string name="your_rating">Deine Bewertung</string>
+    <string name="comment_optional">Kommentar (optional)</string>
+    <string name="learning_optional">Lerninhalt (optional)</string>
+    <string name="save_book">Buch speichern</string>
+    <string name="book_overview">Buchübersicht</string>
+    <string name="personal_reading_shelf">Dein persönliches Bücherregal</string>
+    <string name="learning_with_value">Lerninhalt: %1$s</string>
+    <string name="comment_with_value">Kommentar: %1$s</string>
+</resources>

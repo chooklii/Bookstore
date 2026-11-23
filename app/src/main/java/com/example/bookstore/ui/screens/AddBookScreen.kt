@@ -1,5 +1,6 @@
 package com.example.bookstore.ui.screens
 
+import com.example.bookstore.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.example.bookstore.ui.core.Book
 
 @Composable
@@ -40,12 +42,12 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(
-                text = "Add a book",
+                text = stringResource(R.string.add_book_title),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Save a title, your rating, and an optional note.",
+                text = stringResource(R.string.add_book_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -55,13 +57,13 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
             value = name,
             onValueChange = { name = it },
             modifier = Modifier.fillMaxWidth(),
-            label = { Text("Book name") },
+            label = { Text(stringResource(R.string.book_name)) },
             singleLine = true
         )
 
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
-                text = "Your rating",
+                text = stringResource(R.string.your_rating),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
             )
@@ -85,7 +87,7 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
-            label = { Text("Comment (optional)") },
+            label = { Text(stringResource(R.string.comment_optional)) },
             minLines = 3
         )
 
@@ -95,7 +97,7 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
-            label = { Text("Learning (optional)") },
+            label = { Text(stringResource(R.string.learning_optional)) },
             minLines = 3
         )
 
@@ -105,15 +107,15 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
                     Book(
                         name = name.trim(),
                         rating = rating,
-                        learning = learning.trim().takeIf { it.isNotEmpty() },
-                        comment = comment.trim().takeIf { it.isNotEmpty() }
+                        learning = comment.trim().takeIf { it.isNotEmpty() },
+                        comment = learning.trim().takeIf { it.isNotEmpty() }
                     )
                 )
             },
             modifier = Modifier.fillMaxWidth(),
             enabled = name.isNotBlank()
         ) {
-            Text("Save book")
+            Text(stringResource(R.string.save_book))
         }
     }
 }

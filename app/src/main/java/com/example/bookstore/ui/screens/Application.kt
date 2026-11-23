@@ -1,5 +1,6 @@
 package com.example.bookstore.ui.screens
 
+import com.example.bookstore.R
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 
@@ -10,6 +11,7 @@ import androidx.navigation3.ui.NavDisplay
 import androidx.compose.runtime.mutableStateListOf
 import com.example.bookstore.ui.core.Book
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation3.runtime.entryProvider
 import com.example.bookstore.ui.components.AddBook
 import com.example.bookstore.ui.components.BookList
