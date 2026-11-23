@@ -1,4 +1,8 @@
-<img src="app/src/main/res/drawable-nodpi/ic_launcher_foreground.png" alt="logo" width="400"/>
+<p align="center">
+  <img src="app/src/main/res/drawable-nodpi/ic_launcher_foreground.png"
+       alt="logo"
+       width="400" />
+</p>
 
 # Bookstore
 
