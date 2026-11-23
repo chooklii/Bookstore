@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import androidx.compose.runtime.mutableStateListOf
+import com.example.bookstore.ui.core.Book
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entryProvider
 import com.example.bookstore.ui.components.AddBook
@@ -19,6 +20,7 @@ import com.example.bookstore.ui.core.NavigationElement
 fun Application() {
 
     val backStack = remember { mutableStateListOf<NavKey>(BookList) }
+    val books = listOf(Book("Harry Potter",  5, "Harry Potter ist tot"), Book("Star Wars", 2, "", "Bestes Buch!"))
 
     val currentRoute = backStack.last() as NavigationElement
 
@@ -45,11 +47,15 @@ fun Application() {
             entryProvider = entryProvider {
 
                 entry<BookList> {
-                    BookOverviewScreen()
+                    BookOverviewScreen(
+                        books = books
+                    )
                 }
 
                 entry<AddBook> {
-                    AddBookScreen()
+                    AddBookScreen { _ ->
+                        backStack[backStack.lastIndex] = BookList
+                    }
                 }
             },
             modifier = Modifier.padding(padding)
