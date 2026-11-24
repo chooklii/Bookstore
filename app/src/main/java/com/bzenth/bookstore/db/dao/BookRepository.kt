@@ -2,6 +2,7 @@ package com.bzenth.bookstore.db.dao
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import androidx.core.database.getStringOrNull
 import com.bzenth.bookstore.db.Database
 import com.bzenth.bookstore.db.DbConstants
@@ -46,16 +47,21 @@ class BookRepository(db: Database) {
         return update != -1
     }
 
-    fun getAllBooks(): List<Book>{
+    fun getAllBooksByQuery(query: String): List<Book>{
+        Log.i("BookRepository", "Query Books with Query String: $query")
 
         val books = mutableListOf<Book>();
+
+        val selection = if(query.isNotEmpty()) "${DbConstants.Book.NAME} LIKE ?" else null;
+        val selectionArgs = if(query.isNotEmpty()) arrayOf("%$query%") else null
+
 
         val cursor = readDB.query(
             DbConstants.Book.TABLE_NAME,
             arrayOf(DbConstants.Book.ROW_ID, DbConstants.Book.NAME, DbConstants.Book.RATING,
                 DbConstants.Book.LEARNING, DbConstants.Book.COMMENT),
-            null,
-            null,
+            selection,
+            selectionArgs,
             null,
             null,
             null,

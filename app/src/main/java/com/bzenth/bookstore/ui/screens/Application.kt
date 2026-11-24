@@ -10,6 +10,7 @@ import androidx.navigation3.ui.NavDisplay
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entryProvider
+import com.bzenth.bookstore.db.core.Book
 import com.bzenth.bookstore.db.dao.BookRepository
 import com.bzenth.bookstore.ui.components.AddBook
 import com.bzenth.bookstore.ui.components.BookList
@@ -21,6 +22,15 @@ fun Application(repository: BookRepository) {
 
     val backStack = remember { mutableStateListOf<NavKey>(BookList) }
     val currentRoute = backStack.last() as NavigationElement
+
+    val saveBook = fun(book: Book): Unit{
+        repository.insertBook(book)
+        // todo on false display Error Message!
+        backStack[backStack.lastIndex] = BookList
+    }
+    val cancel = fun(): Unit{
+        backStack[backStack.lastIndex] = BookList
+    }
 
     Scaffold(
         bottomBar = {
@@ -51,11 +61,7 @@ fun Application(repository: BookRepository) {
                 }
 
                 entry<AddBook> {
-                    BookForm(null) { book ->
-                        repository.insertBook(book)
-                        // todo on false display Error Message!
-                        backStack[backStack.lastIndex] = BookList
-                    }
+                    BookForm(null, saveBook, cancel)
                 }
             },
             modifier = Modifier.padding(padding)

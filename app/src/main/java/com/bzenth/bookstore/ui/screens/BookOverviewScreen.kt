@@ -12,12 +12,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -33,20 +35,26 @@ fun BookOverviewScreen(
 ) {
     val editBook = remember { mutableStateOf<Book?>(null) }
 
+    val editBookFunction = fun(book: Book): Unit {
+        repository.editBook(book)
+        editBook.value = null
+    }
+    val cancelEditFunction = fun(): Unit{
+        editBook.value = null
+    }
+
     if(editBook.value == null){
         BookOverview(repository, editBook)
     }else{
-        BookForm(editBook.value) { book ->
-            repository.editBook(book)
-            editBook.value = null
-        }
+        BookForm(editBook.value, editBookFunction, cancelEditFunction)
     }
 }
 
 @Composable
 fun BookOverview(repository: BookRepository, editBook: MutableState<Book?>){
+    var query by remember { mutableStateOf("") }
 
-    val books = repository.getAllBooks();
+    val books = repository.getAllBooksByQuery(query);
 
     LazyColumn(
         modifier = Modifier
@@ -70,6 +78,14 @@ fun BookOverview(repository: BookRepository, editBook: MutableState<Book?>){
                     text = stringResource(R.string.personal_reading_shelf),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(stringResource(R.string.search_by_name)) },
+                    singleLine = true
                 )
             }
         }

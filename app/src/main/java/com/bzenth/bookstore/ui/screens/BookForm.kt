@@ -1,5 +1,8 @@
 package com.bzenth.bookstore.ui.screens
 
+import androidx.compose.ui.graphics.Color
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -27,7 +31,7 @@ import com.bzenth.bookstore.R
 import com.bzenth.bookstore.db.core.Book
 
 @Composable
-fun BookForm(book: Book?, onSave: (Book) -> Unit) {
+fun BookForm(book: Book?, onSave: (Book) -> Unit, cancel: () -> Unit) {
     var name by remember { mutableStateOf(book?.name.orEmpty()) }
     var rating by remember { mutableIntStateOf(book?.rating?.or(5) ?: 5) }
     var comment by remember { mutableStateOf(book?.comment.orEmpty()) }
@@ -100,6 +104,15 @@ fun BookForm(book: Book?, onSave: (Book) -> Unit) {
             label = { Text(stringResource(R.string.comment_optional)) },
             minLines = 3
         )
+
+        Button(
+            onClick = {
+                cancel()
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(stringResource(R.string.cancel_save))
+        }
 
         Button(
             onClick = {
