@@ -1,0 +1,9 @@
+/build
+/.idea/
+/.gradle/
+/app/build/
+/gradle/gradle-daemon-jvm.properties
+/gradle/wrapper/gradle-wrapper.jar
+/gradlew
+/gradlew.bat
+/local.properties
