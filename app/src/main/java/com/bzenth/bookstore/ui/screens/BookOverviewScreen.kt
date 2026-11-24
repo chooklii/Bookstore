@@ -58,7 +58,7 @@ fun BookOverviewScreen(
 fun BookOverview(repository: BookRepository, editBook: MutableState<Book?>){
     var query by remember { mutableStateOf("") }
 
-    val books = repository.getAllBooksByQuery(query);
+    val books = repository.getAllBooksByQuery(query)
 
     LazyColumn(
         modifier = Modifier
