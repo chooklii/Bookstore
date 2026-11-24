@@ -44,7 +44,8 @@ class BookRepository(db: Database) {
             "${DbConstants.Book.ROW_ID} = ?",
             arrayOf(book.rowId.toString()))
 
-        return update != -1
+        // returns count of updated rows
+        return update > 0
     }
 
     fun getAllBooksByQuery(query: String): List<Book>{

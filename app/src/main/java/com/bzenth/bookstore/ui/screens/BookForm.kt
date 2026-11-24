@@ -31,7 +31,7 @@ import com.bzenth.bookstore.db.core.Book
 @Composable
 fun BookForm(book: Book?, onSave: (Book) -> Unit, cancel: () -> Unit) {
     var name by remember { mutableStateOf(book?.name.orEmpty()) }
-    var rating by remember { mutableIntStateOf(book?.rating?.or(5) ?: 5) }
+    var rating by remember { mutableIntStateOf(book?.rating ?: 5) }
     var comment by remember { mutableStateOf(book?.comment.orEmpty()) }
     var learning by remember { mutableStateOf(book?.learning.orEmpty()) }
 
@@ -120,11 +120,11 @@ fun BookForm(book: Book?, onSave: (Book) -> Unit, cancel: () -> Unit) {
             onClick = {
                 onSave(
                     Book(
-                        rowId = book?.rowId?.or(0) ?: 0,
+                        rowId = book?.rowId ?: 0,
                         name = name.trim(),
                         rating = rating,
-                        learning = comment.trim().takeIf { it.isNotEmpty() },
-                        comment = learning.trim().takeIf { it.isNotEmpty() }
+                        learning = learning.trim().takeIf { it.isNotEmpty() },
+                        comment = comment.trim().takeIf { it.isNotEmpty() }
                     )
                 )
             },
