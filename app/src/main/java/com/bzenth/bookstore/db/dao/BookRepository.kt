@@ -1,0 +1,77 @@
+package com.bzenth.bookstore.db.dao
+
+import android.content.ContentValues
+import android.database.sqlite.SQLiteDatabase
+import androidx.core.database.getStringOrNull
+import com.bzenth.bookstore.db.Database
+import com.bzenth.bookstore.db.DbConstants
+import com.bzenth.bookstore.db.core.Book
+
+
+class BookRepository(db: Database) {
+
+    val readDB: SQLiteDatabase = db.readableDatabase;
+    val writeDB: SQLiteDatabase = db.writableDatabase;
+
+    fun insertBook(book: Book): Boolean{
+
+        val values = ContentValues().apply {
+            put(DbConstants.Book.NAME, book.name)
+            put(DbConstants.Book.RATING, book.rating)
+            put(DbConstants.Book.LEARNING, book.learning)
+            put(DbConstants.Book.COMMENT, book.comment)
+        }
+
+        val insert = writeDB.insert(DbConstants.Book.TABLE_NAME, null, values);
+
+        // returns -1 on Error
+        return insert.toInt() != -1;
+    }
+
+    fun editBook(book: Book): Boolean{
+
+        val values = ContentValues().apply {
+            put(DbConstants.Book.NAME, book.name)
+            put(DbConstants.Book.RATING, book.rating)
+            put(DbConstants.Book.LEARNING, book.learning)
+            put(DbConstants.Book.COMMENT, book.comment)
+        }
+
+        val update = writeDB.update(
+            DbConstants.Book.TABLE_NAME,
+            values,
+            "${DbConstants.Book.ROW_ID} = ?",
+            arrayOf(book.rowId.toString()))
+
+        return update != -1
+    }
+
+    fun getAllBooks(): List<Book>{
+
+        val books = mutableListOf<Book>();
+
+        val cursor = readDB.query(
+            DbConstants.Book.TABLE_NAME,
+            arrayOf(DbConstants.Book.ROW_ID, DbConstants.Book.NAME, DbConstants.Book.RATING,
+                DbConstants.Book.LEARNING, DbConstants.Book.COMMENT),
+            null,
+            null,
+            null,
+            null,
+            null,
+            null)
+
+        cursor.use{
+            while(cursor.moveToNext()){
+                books.add(Book(
+                    cursor.getInt( cursor.getColumnIndexOrThrow(DbConstants.Book.ROW_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DbConstants.Book.NAME)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(DbConstants.Book.RATING)),
+                    cursor.getStringOrNull(cursor.getColumnIndexOrThrow(DbConstants.Book.LEARNING)),
+                    cursor.getStringOrNull(cursor.getColumnIndexOrThrow(DbConstants.Book.COMMENT))
+                ))
+            }
+        }
+        return books;
+    }
+}

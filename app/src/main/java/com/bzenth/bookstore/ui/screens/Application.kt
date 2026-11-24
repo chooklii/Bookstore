@@ -1,6 +1,5 @@
-package com.example.bookstore.ui.screens
+package com.bzenth.bookstore.ui.screens
 
-import com.example.bookstore.R
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 
@@ -9,21 +8,18 @@ import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import androidx.compose.runtime.mutableStateListOf
-import com.example.bookstore.ui.core.Book
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.navigation3.runtime.entryProvider
-import com.example.bookstore.ui.components.AddBook
-import com.example.bookstore.ui.components.BookList
-import com.example.bookstore.ui.components.Footer
-import com.example.bookstore.ui.core.NavigationElement
+import com.bzenth.bookstore.db.dao.BookRepository
+import com.bzenth.bookstore.ui.components.AddBook
+import com.bzenth.bookstore.ui.components.BookList
+import com.bzenth.bookstore.ui.components.Footer
+import com.bzenth.bookstore.ui.core.NavigationElement
 
 @Composable
-fun Application() {
+fun Application(repository: BookRepository) {
 
     val backStack = remember { mutableStateListOf<NavKey>(BookList) }
-    val books = listOf(Book("Harry Potter",  5, "Harry Potter ist tot"), Book("Star Wars", 2, "", "Bestes Buch!"))
-
     val currentRoute = backStack.last() as NavigationElement
 
     Scaffold(
@@ -50,12 +46,14 @@ fun Application() {
 
                 entry<BookList> {
                     BookOverviewScreen(
-                        books = books
+                        repository = repository
                     )
                 }
 
                 entry<AddBook> {
-                    AddBookScreen { _ ->
+                    BookForm(null) { book ->
+                        repository.insertBook(book)
+                        // todo on false display Error Message!
                         backStack[backStack.lastIndex] = BookList
                     }
                 }

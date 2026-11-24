@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bookstore"
+    namespace = "com.bzenth.bookstore"
     compileSdk {
         version = release(37) {
             minorApiLevel = 1
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.bookstore"
+        applicationId = "com.bzenth.bookstore"
         minSdk = 35
         targetSdk = 37
         versionCode = 1

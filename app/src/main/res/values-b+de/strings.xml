@@ -3,6 +3,7 @@
     <string name="menu_mybook">Meine Bücher</string>
     <string name="menu_add_book">Buch hinzufügen</string>
     <string name="add_book_title">Buch hinzufügen</string>
+    <string name="edit_book_title">Buch bearbeiten</string>
     <string name="add_book_description">Speichere einen Titel, deine Bewertung und eine optionalen Notiz.</string>
     <string name="book_name">Buchname</string>
     <string name="your_rating">Deine Bewertung</string>

@@ -1,4 +1,4 @@
-package com.example.bookstore.ui.core
+package com.bzenth.bookstore.ui.core
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavKey

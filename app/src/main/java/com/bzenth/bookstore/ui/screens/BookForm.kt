@@ -1,6 +1,5 @@
-package com.example.bookstore.ui.screens
+package com.bzenth.bookstore.ui.screens
 
-import com.example.bookstore.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,17 +20,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.res.stringResource
-import com.example.bookstore.ui.core.Book
+import com.bzenth.bookstore.R
+import com.bzenth.bookstore.db.core.Book
 
 @Composable
-fun AddBookScreen(onBookAdded: (Book) -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var rating by remember { mutableIntStateOf(5) }
-    var comment by remember { mutableStateOf("") }
-    var learning by remember { mutableStateOf("") }
+fun BookForm(book: Book?, onSave: (Book) -> Unit) {
+    var name by remember { mutableStateOf(book?.name.orEmpty()) }
+    var rating by remember { mutableIntStateOf(book?.rating?.or(5) ?: 5) }
+    var comment by remember { mutableStateOf(book?.comment.orEmpty()) }
+    var learning by remember { mutableStateOf(book?.learning.orEmpty()) }
 
     Column(
         modifier = Modifier
@@ -42,7 +42,7 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(
-                text = stringResource(R.string.add_book_title),
+                text = stringResource(if (book == null) R.string.add_book_title else R.string.edit_book_title),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -103,8 +103,9 @@ fun AddBookScreen(onBookAdded: (Book) -> Unit) {
 
         Button(
             onClick = {
-                onBookAdded(
+                onSave(
                     Book(
+                        rowId = book?.rowId?.or(0) ?: 0,
                         name = name.trim(),
                         rating = rating,
                         learning = comment.trim().takeIf { it.isNotEmpty() },

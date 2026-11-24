@@ -1,13 +1,12 @@
-package com.example.bookstore.ui.components
+package com.bzenth.bookstore.ui.components
 
-import com.example.bookstore.R
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.example.bookstore.ui.core.NavigationElement
+import com.bzenth.bookstore.ui.core.NavigationElement
 
 @Composable
 fun Footer(

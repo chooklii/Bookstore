@@ -3,6 +3,7 @@
     <string name="menu_mybook">My Books</string>
     <string name="menu_add_book">Add Book</string>
     <string name="add_book_title">Add a book</string>
+    <string name="edit_book_title">Edit a book</string>
     <string name="add_book_description">Save a title, your rating, and an optional note.</string>
     <string name="book_name">Book name</string>
     <string name="your_rating">Your rating</string>

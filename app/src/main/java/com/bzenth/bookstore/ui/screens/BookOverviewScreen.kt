@@ -1,6 +1,6 @@
-package com.example.bookstore.ui.screens
+package com.bzenth.bookstore.ui.screens
 
-import com.example.bookstore.R
+import com.bzenth.bookstore.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,19 +14,40 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
-import com.example.bookstore.ui.core.Book
+import com.bzenth.bookstore.db.core.Book
+import com.bzenth.bookstore.db.dao.BookRepository
 
 @Composable
 fun BookOverviewScreen(
-    books: List<Book>,
-
+    repository: BookRepository
 ) {
+    val editBook = remember { mutableStateOf<Book?>(null) }
+
+    if(editBook.value == null){
+        BookOverview(repository, editBook)
+    }else{
+        BookForm(editBook.value) { book ->
+            repository.editBook(book)
+            editBook.value = null
+        }
+    }
+}
+
+@Composable
+fun BookOverview(repository: BookRepository, editBook: MutableState<Book?>){
+
+    val books = repository.getAllBooks();
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -52,17 +73,17 @@ fun BookOverviewScreen(
                 )
             }
         }
-
         items(books) { book ->
-            DisplaySingleBook(book)
+            DisplaySingleBook(book, editBook)
         }
     }
 }
 
 @Composable
-fun DisplaySingleBook(book: Book) {
+fun DisplaySingleBook(book: Book, editBook: MutableState<Book?>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
+        onClick = { editBook.value = book},
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow
         )
