@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -26,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import com.bzenth.bookstore.db.core.Book
 import com.bzenth.bookstore.db.dao.BookRepository
 
@@ -80,13 +84,24 @@ fun BookOverview(repository: BookRepository, editBook: MutableState<Book?>){
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                OutlinedTextField(
-                    value = query,
-                    onValueChange = { query = it },
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.search_by_name)) },
-                    singleLine = true
-                )
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    OutlinedTextField(
+                        value = query,
+                        onValueChange = { query = it },
+                        modifier = Modifier.weight(1f),
+                        label = { Text(stringResource(R.string.search_by_name)) },
+                        singleLine = true
+                    )
+                    IconButton(onClick = { query = "" }) {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = stringResource(R.string.reset_search)
+                        )
+                    }
+                }
             }
         }
         items(books) { book ->

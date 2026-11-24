@@ -13,6 +13,7 @@
     <string name="cancel_save">Abbrechen</string>
     <string name="book_overview">Buchübersicht</string>
     <string name="search_by_name">Namenssuche</string>
+    <string name="reset_search">Suche zurücksetzen</string>
     <string name="personal_reading_shelf">Dein persönliches Bücherregal</string>
     <string name="learning_with_value">Lerninhalt: %1$s</string>
     <string name="comment_with_value">Kommentar: %1$s</string>

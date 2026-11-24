@@ -13,6 +13,7 @@
     <string name="cancel_save">Cancel</string>
     <string name="book_overview">Book Overview</string>
     <string name="search_by_name">Search Book by Name</string>
+    <string name="reset_search">Reset search</string>
     <string name="personal_reading_shelf">Your personal reading shelf</string>
     <string name="learning_with_value">Learning: %1$s</string>
     <string name="comment_with_value">Comment: %1$s</string>
